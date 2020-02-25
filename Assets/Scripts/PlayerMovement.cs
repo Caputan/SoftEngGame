@@ -30,10 +30,13 @@ public class PlayerMovement : MonoBehaviour
 		animator.SetFloat("Movement", movement.x);
 		animator.SetFloat("Speed", movement.magnitude);
 
-		animator.SetBool("isGrounded", isGrounded);
+		//animator.SetBool("isGrounded", isGrounded);
 
 		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			animator.SetTrigger("IsJumping");
 			Jump();
+		}
 	}
 
 	void FixedUpdate()
