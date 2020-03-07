@@ -8,7 +8,7 @@ public class GroundCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = gameObject.transform.parent.gameObject;
+		Player = this.gameObject;
     }
 
     // Update is called once per frame
