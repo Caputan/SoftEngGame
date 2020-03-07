@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	float movementSpeed = 5f;
+	public float movementSpeed = 6f;
 	Vector3 movement;
 
 	public Animator animator;
@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			animator.SetTrigger("IsJumping");
 			Jump();
 		}
 	}
@@ -72,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (isGrounded == true)
 		{
+			animator.SetTrigger("IsJumping");
 			player.velocity += Vector2.up * jumpForce;
 		}
 	}

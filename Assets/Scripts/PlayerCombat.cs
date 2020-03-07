@@ -7,6 +7,10 @@ public class PlayerCombat : MonoBehaviour
 
 	public Animator animator;
 
+	float nextInvisTime = 0f;
+	public float invisTime = 5f;
+	public float invisTimeLeft = 0f;
+
 	public Transform attackPos;
 	public float attackRange = 0.5f;
 	public float attackRate = 2f;
@@ -26,7 +30,26 @@ public class PlayerCombat : MonoBehaviour
 				nextAttackTime = Time.time + 1f / attackRate;
 			}
 		}
-    }
+		
+		if(invisTimeLeft > 0f)
+		{
+			invisTimeLeft -= Time.deltaTime;
+		} else if (invisTimeLeft <= 0f)
+		{
+			invisTimeLeft = 0f;
+			GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+		}
+
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+		{ 
+			if (Time.time >= nextInvisTime)
+			{
+				invisTimeLeft = invisTime;
+				Invisibility();
+				nextInvisTime = Time.time + invisTime * 3;
+			}
+		}
+	}
 
 	void Attack()
 	{
@@ -46,5 +69,10 @@ public class PlayerCombat : MonoBehaviour
 			return;
 
 		Gizmos.DrawWireSphere(attackPos.position, attackRange);
+	}
+
+	void Invisibility()
+	{
+		GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
 	}
 }
