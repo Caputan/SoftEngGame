@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	public Transform cameraCoords;
+	public Vector3 cameraOffset;
+	
 	float movementSpeed = 5f;
 	Vector3 movement;
 
@@ -25,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		cameraCoords.position = transform.position + cameraOffset;
+		
 		movement.x = Input.GetAxisRaw("Horizontal");
 
 		animator.SetFloat("Movement", movement.x);

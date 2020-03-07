@@ -764,6 +764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab54398cba42b044abb89bf5acf020ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraCoords: {fileID: 519420032}
+  cameraOffset: {x: 0, y: 0, z: -10}
   animator: {fileID: 1271297416}
   jumpForce: 20
   isGrounded: 1
