@@ -2,7 +2,7 @@
 
 public class Player : MonoBehaviour
 {
-    public Transform cameraCoords;
+    Transform cameraCoords;
     public Vector3 cameraOffset;
 
     public float movementSpeed;
@@ -29,8 +29,17 @@ public class Player : MonoBehaviour
     public float invisibilityTime = 5f;
     public float invisibilityTimeLeft = 0f;
 
-    // Start is called before the first frame update
-    void Start()
+	private bool isInvincible = false;
+	public float invinsibilityTime = 1f;
+	private float _nextInvinsibilityTime = 0f;
+	public float invinsibilityTimeLeft = 0f;
+
+
+	public int currentHealth = 0;
+	private int maxHeatlh = 100;
+
+
+	void Start()
     {
         movementSpeed = 5f;
         _facesRight = false;
@@ -41,12 +50,17 @@ public class Player : MonoBehaviour
         attackRate = 2f;
         _nextTimeAttack = 0f;
         playerDamage = 20;
-    }
+
+		cameraCoords = Camera.main.transform;
+
+		currentHealth = maxHeatlh;
+
+	}
 
     // Update is called once per frame
     void Update()
     {
-        cameraCoords.position = transform.position + cameraOffset;
+		cameraCoords.position = new Vector3(transform.position.x + cameraOffset.x, transform.position.y + cameraOffset.y, -10);
 
         _movement.x = Input.GetAxisRaw("Horizontal");
 
@@ -60,6 +74,11 @@ public class Player : MonoBehaviour
             Jump();
         }
 
+		if(Input.GetKeyDown(KeyCode.E))
+		{
+			TakeDamage(10);
+		}
+
         if (Time.time >= _nextTimeAttack)
         {
             if (Input.GetMouseButtonDown(0))
@@ -72,18 +91,26 @@ public class Player : MonoBehaviour
         if(invisibilityTimeLeft > 0f)
         {
             invisibilityTimeLeft -= Time.deltaTime;
+			invinsibilityTimeLeft -= Time.deltaTime;
+			isInvincible = true;
         }
         else if (invisibilityTimeLeft <= 0f)
         {
             invisibilityTimeLeft = 0f;
             GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         }
+		if(invinsibilityTimeLeft <= 0f)
+		{
+			invinsibilityTimeLeft = 0f;
+			isInvincible = false;
+		}
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (Time.time >= _nextInvisibilityTime)
             {
                 invisibilityTimeLeft = invisibilityTime;
+				invinsibilityTimeLeft = invinsibilityTime;
                 Invisibility();
                 _nextInvisibilityTime = Time.time + invisibilityTime * 3;
             }
@@ -152,4 +179,25 @@ public class Player : MonoBehaviour
     {
         GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
     }
+
+	void TakeDamage(int damage)
+	{
+		if (!isInvincible)
+		{
+			currentHealth -= damage;
+			invisibilityTimeLeft = 0f;
+
+			animator.SetTrigger("Hurt");
+
+			if (currentHealth <= 0)
+			{
+				Die();
+			}
+		}
+	}
+
+	void Die()
+	{
+
+	}
 }
