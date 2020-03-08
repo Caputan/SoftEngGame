@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
 
 		if(Input.GetKeyDown(KeyCode.E))
 		{
-			TakeDamage(10);
+			LoadProgress();
 		}
 
         if (Time.time >= _nextTimeAttack)
@@ -199,5 +199,23 @@ public class Player : MonoBehaviour
 	void Die()
 	{
 
+	}
+
+	public void SaveProgress()
+	{
+		SaveSystem.SavePlayer(this);
+	}
+
+	public void LoadProgress()
+	{
+		DataToSave data = SaveSystem.LoadPlayer();
+
+		currentHealth = data.playerHealth;
+
+		Vector2 position;
+		position.x = data.playerPosition[0];
+		position.y = data.playerPosition[1];
+
+		transform.position = position;
 	}
 }
