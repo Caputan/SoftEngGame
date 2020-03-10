@@ -34,6 +34,8 @@ public class Database : MonoBehaviour
             "CREATE TABLE IF NOT EXISTS Progress (" +
             "character_id INTEGER NOT NULL," +
             "location_id INTEGER NOT NULL" +
+            "FOREIGN KEY(\"character_id\") REFERENCES \"Characters\"(\"id\")," +
+            "FOREIGN KEY(\"location_id\") REFERENCES \"Locations\"(\"id\")" +
             ")"
         };
         foreach (var createTableQuery in createTableQueries)
