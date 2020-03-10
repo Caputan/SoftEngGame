@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
 
 	private bool _isInvincible = false;
 	private float _nextInvinсibilityTime;
-	public float invinсibilityTime = 1f;
-	public float invinsibilityTimeLeft = 0f;
+	public float invinсibilityTime;
+	public float invincibilityTimeLeft;
 
 
 	public int currentHealth = 0;
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         if(invisibilityTimeLeft > 0f)
         {
             invisibilityTimeLeft -= Time.deltaTime;
-			invinsibilityTimeLeft -= Time.deltaTime;
+			invincibilityTimeLeft -= Time.deltaTime;
 			_isInvincible = true;
         }
         else if (invisibilityTimeLeft <= 0f)
@@ -100,9 +100,9 @@ public class Player : MonoBehaviour
             invisibilityTimeLeft = 0f;
             GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         }
-		if(invinsibilityTimeLeft <= 0f)
+		if(invincibilityTimeLeft <= 0f)
 		{
-			invinsibilityTimeLeft = 0f;
+			invincibilityTimeLeft = 0f;
 			_isInvincible = false;
 		}
 
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
             if (Time.time >= _nextInvisibilityTime)
             {
                 invisibilityTimeLeft = invisibilityTime;
-				invinsibilityTimeLeft = invinсibilityTime;
+				invincibilityTimeLeft = invinсibilityTime;
                 Invisibility();
                 _nextInvisibilityTime = Time.time + invisibilityTime * 3;
             }

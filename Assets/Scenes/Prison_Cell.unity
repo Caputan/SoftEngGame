@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 466927037}
   - component: {fileID: 466927036}
   m_Layer: 0
-  m_Name: Background wals
+  m_Name: Background walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1541,7 +1541,6 @@ GameObject:
   - component: {fileID: 954272029}
   - component: {fileID: 954272030}
   - component: {fileID: 954272032}
-  - component: {fileID: 954272030}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1638,7 +1637,7 @@ MonoBehaviour:
   playerDamage: 20
   invisibilityTime: 5
   invisibilityTimeLeft: 0
-  invinsibilityTime: 1
+  "invin\u0441ibilityTime": 1
   invinsibilityTimeLeft: 0
   currentHealth: 0
 --- !u!114 &954272032
