@@ -1539,6 +1539,7 @@ GameObject:
   - component: {fileID: 954272027}
   - component: {fileID: 954272028}
   - component: {fileID: 954272029}
+  - component: {fileID: 954272030}
   - component: {fileID: 954272032}
   - component: {fileID: 954272030}
   m_Layer: 0
@@ -1623,7 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d022293a514318c46a35332fcba0a129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOffset: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 0, z: -10}
   movementSpeed: 6
   animator: {fileID: 1271297416}
   jumpForce: 20

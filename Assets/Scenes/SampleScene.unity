@@ -1842,7 +1842,6 @@ GameObject:
   - component: {fileID: 954272027}
   - component: {fileID: 954272028}
   - component: {fileID: 954272029}
-  - component: {fileID: 954272030}
   - component: {fileID: 954272032}
   m_Layer: 0
   m_Name: Player
@@ -1915,33 +1914,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &954272030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954272026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d022293a514318c46a35332fcba0a129, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraCoords: {fileID: 519420032}
-  cameraOffset: {x: 0, y: 0, z: -10}
-  movementSpeed: 6
-  animator: {fileID: 1271297416}
-  jumpForce: 20
-  isGrounded: 1
-  attackPosition: {fileID: 618316140}
-  attackRange: 0.53
-  attackRate: 1
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 512
-  playerDamage: 20
-  invisibilityTime: 2
-  invisibilityTimeLeft: 0
 --- !u!114 &954272032
 MonoBehaviour:
   m_ObjectHideFlags: 0

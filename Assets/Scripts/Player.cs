@@ -2,7 +2,7 @@
 
 public class Player : MonoBehaviour
 {
-    Transform cameraCoords;
+    private Transform _cameraCoords;
     public Vector3 cameraOffset;
 
     public float movementSpeed;
@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     private Rigidbody2D _player;
 
     public float jumpForce;
-
     public bool isGrounded;
 
     public Transform attackPosition;
@@ -25,13 +24,13 @@ public class Player : MonoBehaviour
     public int playerDamage;
     private float _nextTimeAttack;
 
-    private float _nextInvisibilityTime = 0f;
-    public float invisibilityTime = 5f;
-    public float invisibilityTimeLeft = 0f;
+    private float _nextInvisibilityTime;
+    public float invisibilityTime;
+    public float invisibilityTimeLeft;
 
-	private bool isInvincible = false;
-	public float invinsibilityTime = 1f;
-	private float _nextInvinsibilityTime = 0f;
+	private bool _isInvincible = false;
+	private float _nextInvinсibilityTime;
+	public float invinсibilityTime = 1f;
 	public float invinsibilityTimeLeft = 0f;
 
 
@@ -51,16 +50,18 @@ public class Player : MonoBehaviour
         _nextTimeAttack = 0f;
         playerDamage = 20;
 
-		cameraCoords = Camera.main.transform;
+		_cameraCoords = Camera.main.transform;
 
 		currentHealth = maxHeatlh;
 
-	}
+		_nextInvisibilityTime = 0f;
+		_nextInvinсibilityTime = 0f;
+    }
 
     // Update is called once per frame
     void Update()
     {
-		cameraCoords.position = new Vector3(transform.position.x + cameraOffset.x, transform.position.y + cameraOffset.y, -10);
+		_cameraCoords.position = new Vector3(transform.position.x + cameraOffset.x, transform.position.y + cameraOffset.y, -10);
 
         _movement.x = Input.GetAxisRaw("Horizontal");
 
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
         {
             invisibilityTimeLeft -= Time.deltaTime;
 			invinsibilityTimeLeft -= Time.deltaTime;
-			isInvincible = true;
+			_isInvincible = true;
         }
         else if (invisibilityTimeLeft <= 0f)
         {
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour
 		if(invinsibilityTimeLeft <= 0f)
 		{
 			invinsibilityTimeLeft = 0f;
-			isInvincible = false;
+			_isInvincible = false;
 		}
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour
             if (Time.time >= _nextInvisibilityTime)
             {
                 invisibilityTimeLeft = invisibilityTime;
-				invinsibilityTimeLeft = invinsibilityTime;
+				invinsibilityTimeLeft = invinсibilityTime;
                 Invisibility();
                 _nextInvisibilityTime = Time.time + invisibilityTime * 3;
             }
@@ -182,7 +183,7 @@ public class Player : MonoBehaviour
 
 	void TakeDamage(int damage)
 	{
-		if (!isInvincible)
+		if (!_isInvincible)
 		{
 			currentHealth -= damage;
 			invisibilityTimeLeft = 0f;
