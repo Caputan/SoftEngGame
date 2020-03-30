@@ -1496,12 +1496,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13c6124755dedf4a995bc63be3b6abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 954272027}
   patrolLeftBorderX: 7
   patrolRightBorderX: 10
   animator: {fileID: 959421519}
   maxHealth: 0
   waitTime: 2
   movementSpeed: 3
+  detectDistance: 7
+  allowedWalkAwayDistance: 5
 --- !u!1 &618316139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,7 +1563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954272026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -2.53, z: 0}
+  m_LocalPosition: {x: 4, y: -2.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271297415}

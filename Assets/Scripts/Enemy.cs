@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+	public Transform player; // TODO: use GetComponent or smth
 	private Rigidbody2D _enemy;
 	public float patrolLeftBorderX;
 	public float patrolRightBorderX;
@@ -19,7 +20,11 @@ public class Enemy : MonoBehaviour
 	private bool _isWalking;
 	private bool _facesRight;
 	private float _currentWaitTime;
-
+	
+	public float detectDistance;
+	public float allowedWalkAwayDistance;
+	private bool _isHunting;
+	
 	// Start is called before the first frame update
     void Start()
     {
@@ -28,46 +33,13 @@ public class Enemy : MonoBehaviour
 		_enemy = GetComponent<Rigidbody2D>();
 		_currentWaitTime = waitTime;
 		_isWalking = true;
+		_isHunting = false;
     }
 
     private void Update()
     {
-	    if (_isWalking)
-	    {
-		    if (_facesRight)
-		    {
-			    if (transform.position.x < patrolRightBorderX)
-			    {
-				    _enemy.velocity = new Vector2(movementSpeed, 0);
-			    }
-			    else
-			    {
-				    _isWalking = false;
-			    }
-		    }
-		    else
-		    {
-			    if (transform.position.x > patrolLeftBorderX)
-			    {
-				    _enemy.velocity = new Vector2(-movementSpeed, 0);
-			    }
-			    else
-			    {
-				    _isWalking = false;
-			    }
-		    }
-	    }
-	    else
-	    {
-		    _currentWaitTime -= Time.deltaTime;
-
-		    if (_currentWaitTime <= 0)
-		    {
-			    _currentWaitTime = waitTime;
-			    Flip();
-			    _isWalking = true;
-		    }
-	    }
+	    Patrol();
+	    HuntPlayer();
     }
 
     public void TakeDamage(int damage)
@@ -96,21 +68,86 @@ public class Enemy : MonoBehaviour
 		transform.Rotate(0f, 180f, 0f);
 	}
 	
-	private void Move()
+	private void Patrol()
 	{
+		if (_isHunting)
+		{
+			return;
+		}
+		if (_isWalking)
+		{
+			if (_facesRight)
+			{
+				if (transform.position.x < patrolRightBorderX) // Goes right
+				{
+					_enemy.velocity = new Vector2(movementSpeed, 0);
+				}
+				else
+				{
+					_isWalking = false;
+				}
+			}
+			else
+			{
+				if (transform.position.x > patrolLeftBorderX) // Goes left
+				{
+					_enemy.velocity = new Vector2(-movementSpeed, 0);
+				}
+				else
+				{
+					_isWalking = false;
+				}
+			}
+		}
+		else
+		{
+			_currentWaitTime -= Time.deltaTime;
+
+			if (_currentWaitTime <= 0)
+			{
+				_currentWaitTime = waitTime;
+				Flip();
+				_isWalking = true;
+			}
+		}
+	}
+
+	private void HuntPlayer()
+	{
+		var enemyPos = _enemy.position.x;
+		var playerPos = player.position.x;
+		var allowedLeftBorder = patrolLeftBorderX - allowedWalkAwayDistance;
+		var allowedRightBorder = patrolRightBorderX + allowedWalkAwayDistance;
+
+		if (playerPos < allowedLeftBorder || playerPos > allowedRightBorder)
+		{
+			_isHunting = false;
+			return;
+		}
+
+		var playerOnTheLeft = enemyPos - playerPos > 0;
+		var distance = Math.Sqrt(Math.Pow(enemyPos - playerPos, 2));
 		
-		
-		// transform.position += _movement * Time.deltaTime * movementSpeed;
-		//
-		//
-		//
-		// if (_movement.x > 0 && !_facesRight)
-		// {
-		// 	Flip();
-		// }
-		// else if (_movement.x < 0 && _facesRight)
-		// {
-		// 	Flip();
-		// }
+		if (distance <= detectDistance)
+		{
+			_isHunting = true;
+
+			if (playerOnTheLeft)
+			{
+				if (_facesRight)
+				{
+					Flip();
+				}
+				_enemy.velocity = new Vector2(-movementSpeed * 2, 0);
+			}
+			else
+			{
+				if (!_facesRight)
+				{
+					Flip();
+				}
+				_enemy.velocity = new Vector2(movementSpeed * 2, 0);
+			}
+		}
 	}
 }
