@@ -33,9 +33,11 @@ public class Player : MonoBehaviour
 	public float invinсibilityTime;
 	public float invincibilityTimeLeft;
 
+    public bool canClimb = false;
 
 	public int currentHealth = 0;
 	private int maxHeatlh = 100;
+    private HealthBar _healthBar;
 
 
 	void Start()
@@ -53,6 +55,8 @@ public class Player : MonoBehaviour
 		_cameraCoords = Camera.main.transform;
 
 		currentHealth = maxHeatlh;
+        _healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        _healthBar.SetMaxHealth(maxHeatlh);
 
 		_nextInvisibilityTime = 0f;
 		_nextInvinсibilityTime = 0f;
@@ -77,7 +81,7 @@ public class Player : MonoBehaviour
 
 		if(Input.GetKeyDown(KeyCode.E))
 		{
-			LoadProgress();
+            TakeDamage(10);
 		}
 
         if (Time.time >= _nextTimeAttack)
@@ -157,6 +161,24 @@ public class Player : MonoBehaviour
             // ... flip the player.
             Flip();
         }
+
+        if (canClimb)
+        {
+            _player.gravityScale = 0f;
+            Climb();
+            isGrounded = false;
+        } else
+        {
+            _player.gravityScale = 10f;
+            isGrounded = true;
+        }
+    }
+
+    void Climb()
+    {
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        _player.velocity = new Vector2(0f, vertical * movementSpeed);
     }
 
     private void Flip()
@@ -186,6 +208,9 @@ public class Player : MonoBehaviour
 		if (!_isInvincible)
 		{
 			currentHealth -= damage;
+
+            _healthBar.SetHealth(currentHealth);
+
 			invisibilityTimeLeft = 0f;
 
 			animator.SetTrigger("Hurt");
