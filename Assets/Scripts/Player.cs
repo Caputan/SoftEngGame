@@ -120,6 +120,7 @@ public class Player : MonoBehaviour
                 _nextInvisibilityTime = Time.time + invisibilityTime * 3;
             }
         }
+
     }
 
     void Attack()
@@ -166,11 +167,11 @@ public class Player : MonoBehaviour
         {
             _player.gravityScale = 0f;
             Climb();
-            isGrounded = false;
+            //isGrounded = false;
         } else
         {
             _player.gravityScale = 10f;
-            isGrounded = true;
+            //isGrounded = true;
         }
     }
 
@@ -195,6 +196,7 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("IsJumping");
             _player.velocity += Vector2.up * jumpForce;
+  
         }
     }
     
