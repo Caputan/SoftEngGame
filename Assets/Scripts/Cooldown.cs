@@ -2,6 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary> 
+/// Скрипт для управления UI-элемента перезарядки "невидимости" 
+/// </summary>
 public class Cooldown : MonoBehaviour
 {
     [SerializeField]

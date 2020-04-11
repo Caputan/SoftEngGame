@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+
+/// <summary> 
+/// Скрипт для регулирования данных для сохранения 
+/// </summary>
 public class DataToSave
 {
 	public int playerHealth;

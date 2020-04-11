@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary> 
+/// Скрипт для проверки возможности игрока взаимодействовать с окружающими объектами
+/// </summary>
 public class InteractionCheck : MonoBehaviour
 {
     GameObject Player;

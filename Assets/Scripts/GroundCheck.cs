@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary> 
+/// Скрипт для проверки нахождения игрока на земле
+/// </summary>
 public class GroundCheck : MonoBehaviour
 {
     GameObject Player;

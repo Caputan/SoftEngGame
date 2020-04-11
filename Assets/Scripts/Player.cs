@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary> 
+/// Скрипт для управления игровым персонажем 
+/// </summary>
 public class Player : MonoBehaviour
 {
     private Transform _cameraCoords;
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
 	public int currentHealth;
     private int maxHeatlh;
     private HealthBar _healthBar;
+
 
 
 	void Start()
@@ -135,6 +140,10 @@ public class Player : MonoBehaviour
 
     }
 
+
+    /// <summary> 
+    /// Описание способа атаки игрового персонажа 
+    /// </summary>
     void Attack()
     {
         animator.SetTrigger("Attack");
@@ -160,6 +169,10 @@ public class Player : MonoBehaviour
         Move();
     }
 
+
+    /// <summary> 
+    /// Обработка нажатий кнопок с клавиатуры управления движением персонажа  
+    /// </summary>
     void Move()
     {
         this.transform.position += _movement * Time.deltaTime * movementSpeed;
@@ -187,6 +200,10 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    /// <summary> 
+    /// Подъем/спуск по лестнице
+    /// </summary>
     void Climb()
     {
         float vertical = Input.GetAxisRaw("Vertical");
@@ -202,6 +219,10 @@ public class Player : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+
+    /// <summary> 
+    /// Описание способа прыжока игрового персонажа 
+    /// </summary>
     void Jump()
     {
         if (isGrounded == true)
@@ -211,13 +232,24 @@ public class Player : MonoBehaviour
   
         }
     }
-    
+
+
+    /// <summary> 
+    /// Переключение режима "невидимости" персонажа 
+    /// </summary>
     void Invisibility()
     {
         GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
     }
 
-	void TakeDamage(int damage)
+
+    /// <summary> 
+    /// Получение урона игровым персонажем
+    /// </summary>
+    /// <param name="damage">
+    /// Значение получаемого урона
+    /// </param>
+    void TakeDamage(int damage)
 	{
 		if (!_isInvincible)
 		{
@@ -236,17 +268,29 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	void Die()
+
+    /// <summary> 
+    /// Смерть игрового персонажа 
+    /// </summary>
+    void Die()
 	{
 
 	}
 
-	public void SaveProgress()
+
+    /// <summary> 
+    /// Сохранение прогресса персонажа
+    /// </summary>
+    public void SaveProgress()
 	{
 		SaveSystem.SavePlayer(this);
 	}
 
-	public void LoadProgress()
+
+    /// <summary> 
+    /// Загрузка прогресса персонажа 
+    /// </summary>
+    public void LoadProgress()
 	{
 		DataToSave data = SaveSystem.LoadPlayer();
 

@@ -2,8 +2,19 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+
+/// <summary> 
+/// Скрипт для сохранения/загрузки данных
+/// </summary>
 public static class SaveSystem 
 {
+
+	/// <summary> 
+	/// Сохранение прогресса игрока 
+	/// </summary>
+	/// <param name="player">
+	/// Игровой персонаж, прогресс которого необходимо сохранить
+	/// </param>
 	public static void SavePlayer(Player player)
 	{
 		BinaryFormatter formatter = new BinaryFormatter();
@@ -16,6 +27,10 @@ public static class SaveSystem
 		stream.Close();
 	}
 
+
+	/// <summary> 
+	/// Загрузка прогресса игрока
+	/// </summary>
 	public static DataToSave LoadPlayer()
 	{
 		string path = Application.persistentDataPath + "/player.op";
@@ -31,8 +46,6 @@ public static class SaveSystem
 		}
 		else
 		{
-			Debug.Log("Fuck you!");
-
 			return null;
 		}
 	}

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary> 
+/// Скрипт для управления точкой созранения прогресса
+/// </summary>
 public class SavePoint : MonoBehaviour
 {
 
