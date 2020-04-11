@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -24,19 +25,20 @@ public class Player : MonoBehaviour
     public int playerDamage;
     private float _nextTimeAttack;
 
-    private float _nextInvisibilityTime;
+    public float nextInvisibilityTime;
     public float invisibilityTime;
     public float invisibilityTimeLeft;
+    public bool isInvisible;
 
-	private bool _isInvincible = false;
-	private float _nextInvinсibilityTime;
+	private bool _isInvincible;
+	public float _nextInvinсibilityTime;
 	public float invinсibilityTime;
 	public float invincibilityTimeLeft;
 
-    public bool canClimb = false;
+    public bool canClimb;
 
-	public int currentHealth = 0;
-	private int maxHeatlh = 100;
+	public int currentHealth;
+    private int maxHeatlh;
     private HealthBar _healthBar;
 
 
@@ -54,12 +56,20 @@ public class Player : MonoBehaviour
 
 		_cameraCoords = Camera.main.transform;
 
+        canClimb = false;
+
+        maxHeatlh = 100;
 		currentHealth = maxHeatlh;
         _healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+
         _healthBar.SetMaxHealth(maxHeatlh);
 
-		_nextInvisibilityTime = 0f;
+        isInvisible = false;
+        _isInvincible = false;
+		nextInvisibilityTime = 0f;
 		_nextInvinсibilityTime = 0f;
+        invinсibilityTime = 1f;
+        invisibilityTime = 5f;
     }
 
     // Update is called once per frame
@@ -98,11 +108,13 @@ public class Player : MonoBehaviour
             invisibilityTimeLeft -= Time.deltaTime;
 			invincibilityTimeLeft -= Time.deltaTime;
 			_isInvincible = true;
+            isInvisible = true;
         }
         else if (invisibilityTimeLeft <= 0f)
         {
             invisibilityTimeLeft = 0f;
             GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+            isInvisible = false;
         }
 		if(invincibilityTimeLeft <= 0f)
 		{
@@ -112,12 +124,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (Time.time >= _nextInvisibilityTime)
+            if (Time.time >= nextInvisibilityTime)
             {
                 invisibilityTimeLeft = invisibilityTime;
 				invincibilityTimeLeft = invinсibilityTime;
                 Invisibility();
-                _nextInvisibilityTime = Time.time + invisibilityTime * 3;
+                nextInvisibilityTime = Time.time + invisibilityTime * 3;
             }
         }
 
