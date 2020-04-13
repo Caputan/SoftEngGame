@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
     }
 
-	void TakeDamage(int damage)
+	public void TakeDamage(int damage)
 	{
 		if (!_isInvincible)
 		{
@@ -199,7 +199,8 @@ public class Player : MonoBehaviour
 
 	void Die()
 	{
-
+		GetComponent<Collider2D>().enabled = false;
+		enabled = false;
 	}
 
 	public void SaveProgress()

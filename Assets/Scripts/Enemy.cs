@@ -24,7 +24,12 @@ public class Enemy : MonoBehaviour
 	public float detectDistance;
 	public float allowedWalkAwayDistance;
 	private bool _isHunting;
-	
+
+	public int enemyDamage;
+	public float attackDelay;
+	private bool _playerInAttackRange;
+	private float _currentAttackDelay;
+
 	// Start is called before the first frame update
     void Start()
     {
@@ -35,6 +40,8 @@ public class Enemy : MonoBehaviour
 		_currentWaitTime = waitTime;
 		_isWalking = true;
 		_isHunting = false;
+		_playerInAttackRange = false;
+		_currentAttackDelay = 0;
     }
 
     private void Update()
@@ -69,6 +76,13 @@ public class Enemy : MonoBehaviour
 
 		transform.Rotate(0f, 180f, 0f);
 	}
+
+	private void Attack()
+	{
+		// animator.SetTrigger("Attack");
+
+		player.GetComponent<Player>().TakeDamage(enemyDamage);
+	}
 	
 	private void Patrol()
 	{
@@ -76,6 +90,7 @@ public class Enemy : MonoBehaviour
 		{
 			return;
 		}
+		
 		if (_isWalking)
 		{
 			if (_facesRight)
@@ -114,6 +129,23 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.collider.tag == "Player")
+		{
+			_currentAttackDelay = 0;
+			_playerInAttackRange = true;
+		}
+	}
+	
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.collider.tag == "Player")
+		{
+			_playerInAttackRange = false;
+		}
+	}
+	
 	private void HuntPlayer()
 	{
 		var enemyPos = _enemy.position.x;
@@ -129,6 +161,18 @@ public class Enemy : MonoBehaviour
 
 		var playerOnTheLeft = enemyPos - playerPos > 0;
 		var distance = Math.Sqrt(Math.Pow(enemyPos - playerPos, 2));
+
+		if (_playerInAttackRange)
+		{
+			_currentAttackDelay -= Time.deltaTime;
+
+			if (_currentAttackDelay <= 0)
+			{
+				_currentAttackDelay = attackDelay;
+				Attack();
+			}
+			return;
+		}
 		
 		if (distance <= detectDistance)
 		{
