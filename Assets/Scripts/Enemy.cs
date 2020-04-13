@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
 		maxHealth = currentHealth;
+		player = GameObject.Find("Player").GetComponent<Transform>();
 		_facesRight = true;
 		_enemy = GetComponent<Rigidbody2D>();
 		_currentWaitTime = waitTime;
@@ -40,7 +41,8 @@ public class Enemy : MonoBehaviour
     {
 	    Patrol();
 	    HuntPlayer();
-    }
+		animator.SetFloat("Speed", _enemy.velocity.magnitude);
+	}
 
     public void TakeDamage(int damage)
 	{
