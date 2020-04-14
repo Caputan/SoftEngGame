@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
 	
 	public Animator animator;
 
-	public int maxHealth = 0;
-	private int currentHealth = 100;
+	public int maxHealth;
+	private int currentHealth;
 
 	public float waitTime;
 	public float movementSpeed;
@@ -33,7 +33,20 @@ public class Enemy : MonoBehaviour
 	// Start is called before the first frame update
     void Start()
     {
-		maxHealth = currentHealth;
+	    // Default values
+	    patrolLeftBorderX = 2.0f;
+	    patrolRightBorderX = 2.0f;
+	    maxHealth = 100;
+	    waitTime = 2;
+	    movementSpeed = 3.0f;
+	    detectDistance = 4.0f;
+	    allowedWalkAwayDistance = 3.0f;
+	    enemyDamage = 20;
+	    attackDelay = 2.0f;
+	    
+	    patrolLeftBorderX = transform.position.x - patrolLeftBorderX;
+	    patrolRightBorderX += transform.position.x;
+	    currentHealth = maxHealth;
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		_facesRight = true;
 		_enemy = GetComponent<Rigidbody2D>();
@@ -47,6 +60,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+	    Debug.Log(patrolLeftBorderX);
 	    Patrol();
 	    HuntPlayer();
 		animator.SetFloat("Speed", _enemy.velocity.magnitude);
