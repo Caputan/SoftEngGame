@@ -41,7 +41,15 @@ public class Menu : MonoBehaviour
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            PlayerPrefs.DeleteAll();
+        }
+    }
+
     public void ButtonCharacterPressed()
     {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

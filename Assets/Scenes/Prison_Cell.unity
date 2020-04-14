@@ -1437,6 +1437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3060404942842032878, guid: c5fdce59cc386cd42b85622fcbafbbde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3060404943320470098, guid: c5fdce59cc386cd42b85622fcbafbbde,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1556,7 +1561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3165141, y: -1.1752589, z: -10}
+  m_LocalPosition: {x: -2.6545365, y: -1.187247, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1640,6 +1645,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1232368737 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2553539403614618800, guid: 587f723767159b444bd5a33e1299bfc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2553539402957986047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1344696465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,6 +2377,35 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1667575089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2553539403171964914, guid: 587f723767159b444bd5a33e1299bfc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2553539402957986047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1667575090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667575089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f13c6124755dedf4a995bc63be3b6abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 954272027}
+  patrolLeftBorderX: 5
+  patrolRightBorderX: 5
+  animator: {fileID: 1232368737}
+  maxHealth: 0
+  waitTime: 0
+  movementSpeed: 0
+  detectDistance: 0
+  allowedWalkAwayDistance: 0
+  enemyDamage: 0
+  attackDelay: 0
 --- !u!1 &1757095741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,7 +2484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757095741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3199998, y: -2.3300002, z: -10}
+  m_LocalPosition: {x: -2.6500003, y: -2.6900003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039136351}
@@ -5424,12 +5464,12 @@ PrefabInstance:
     - target: {fileID: 2103026243318403854, guid: 53fca236d6478fb4ba9c531cc1d771ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.32
+      value: -2.65
       objectReference: {fileID: 0}
     - target: {fileID: 2103026243318403854, guid: 53fca236d6478fb4ba9c531cc1d771ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.33
+      value: -2.69
       objectReference: {fileID: 0}
     - target: {fileID: 2103026243318403854, guid: 53fca236d6478fb4ba9c531cc1d771ac,
         type: 3}
@@ -5550,5 +5590,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2553539403171964910, guid: 587f723767159b444bd5a33e1299bfc2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 587f723767159b444bd5a33e1299bfc2, type: 3}

@@ -199,7 +199,7 @@ public class Enemy : MonoBehaviour
 				{
 					Flip();
 				}
-				_enemy.velocity = new Vector2(-movementSpeed * 2, 0);
+				_enemy.velocity = new Vector2(-movementSpeed * 1.2f, 0);
 			}
 			else
 			{
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour
 				{
 					Flip();
 				}
-				_enemy.velocity = new Vector2(movementSpeed * 2, 0);
+				_enemy.velocity = new Vector2(movementSpeed * 1.2f, 0);
 			}
 		}
 	}

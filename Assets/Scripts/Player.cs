@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -276,7 +277,9 @@ public class Player : MonoBehaviour
 	{
 		GetComponent<Collider2D>().enabled = false;
 		enabled = false;
-	}
+
+        SceneManager.LoadScene(0);
+    }
 
 
     /// <summary> 
