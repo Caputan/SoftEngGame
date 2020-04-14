@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
     /// <param name="damage">
     /// Значение получаемого урона
     /// </param>
-    void TakeDamage(int damage)
+	public void TakeDamage(int damage)
 	{
 		if (!_isInvincible)
 		{
@@ -274,7 +274,8 @@ public class Player : MonoBehaviour
     /// </summary>
     void Die()
 	{
-
+		GetComponent<Collider2D>().enabled = false;
+		enabled = false;
 	}
 
 
