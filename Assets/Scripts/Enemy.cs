@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public Transform player; // TODO: use GetComponent or smth
+	public Transform player;
 	private Rigidbody2D _enemy;
 	public float patrolLeftBorderX;
 	public float patrolRightBorderX;
@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
 		_isHunting = false;
 		_playerInAttackRange = false;
 		_currentAttackDelay = 0;
+		movementSpeed = 5f;
     }
 
     private void Update()

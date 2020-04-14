@@ -52,7 +52,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ButtonSettingsPressed()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(5);
     }
     
     /// <summary>
@@ -104,5 +104,10 @@ public class Menu : MonoBehaviour
     {
         var resolution = _resolutions[index];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void ButtonPlayPressed()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
