@@ -38,15 +38,30 @@ public static class SaveSystem
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
+			if (stream.Length != 0)
+			{
+				DataToSave data = formatter.Deserialize(stream) as DataToSave;
+				stream.Close();
 
-			DataToSave data = formatter.Deserialize(stream) as DataToSave;
-			stream.Close();
 
-			return data;
+				return data;
+			} else
+			{
+				return null;
+			}
 		}
 		else
 		{
 			return null;
+		}
+	}
+
+	public static void DeleteData()
+	{
+		string path = Application.persistentDataPath + "/player.op";
+		if (File.Exists(path))
+		{
+			File.Delete(path);
 		}
 	}
 }

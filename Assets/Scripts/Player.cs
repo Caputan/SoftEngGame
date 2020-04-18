@@ -76,6 +76,8 @@ public class Player : MonoBehaviour
 		_nextInvinсibilityTime = 0f;
         invinсibilityTime = 1f;
         invisibilityTime = 5f;
+
+        LoadProgress();
     }
 
     // Update is called once per frame
@@ -140,7 +142,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
 
     /// <summary> 
     /// Описание способа атаки игрового персонажа 
@@ -279,6 +280,8 @@ public class Player : MonoBehaviour
 		enabled = false;
 
         SceneManager.LoadScene(0);
+
+        SaveSystem.DeleteData();
     }
 
 
@@ -297,13 +300,12 @@ public class Player : MonoBehaviour
     public void LoadProgress()
 	{
 		DataToSave data = SaveSystem.LoadPlayer();
+        if (data != null)
+        {
+            currentHealth = data.playerHealth;
+            _healthBar.SetHealth(currentHealth);
 
-		currentHealth = data.playerHealth;
-
-		Vector2 position;
-		position.x = data.playerPosition[0];
-		position.y = data.playerPosition[1];
-
-		transform.position = position;
-	}
+            GameObject.Find("Invisibility").GetComponent<Cooldown>().imageCooldown.fillAmount = data.cooldown;
+        }
+    }
 }

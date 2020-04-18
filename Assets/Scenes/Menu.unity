@@ -367,7 +367,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 451664514}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863752638}
+        m_MethodName: ButtonSettingsPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &451664514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,6 +977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3ee1614b9ef264ea4b23fbdbbab9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
+  resolutionsDropdown: {fileID: 0}
 --- !u!1 &1006717255
 GameObject:
   m_ObjectHideFlags: 0

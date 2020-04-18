@@ -10,14 +10,12 @@ using UnityEngine;
 public class DataToSave
 {
 	public int playerHealth;
-	public float[] playerPosition;
+	public float cooldown;
 
 	public DataToSave(Player player)
 	{
 		playerHealth = player.currentHealth;
-		playerPosition = new float[2];
 
-		playerPosition[0] = player.transform.position.x;
-		playerPosition[1] = player.transform.position.y;
+		cooldown = GameObject.Find("Invisibility").GetComponent<Cooldown>().imageCooldown.fillAmount;
 	}
 }

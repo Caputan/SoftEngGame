@@ -62,7 +62,10 @@ public class Enemy : MonoBehaviour
     {
 	    Debug.Log(patrolLeftBorderX);
 	    Patrol();
-	    HuntPlayer();
+		if (!player.gameObject.GetComponent<Player>().isInvisible)
+		{
+			HuntPlayer();
+		}
 		animator.SetFloat("Speed", _enemy.velocity.magnitude);
 	}
 
