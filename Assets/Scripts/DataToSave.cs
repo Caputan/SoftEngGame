@@ -15,7 +15,5 @@ public class DataToSave
 	public DataToSave(Player player)
 	{
 		playerHealth = player.currentHealth;
-
-		cooldown = GameObject.Find("Invisibility").GetComponent<Cooldown>().imageCooldown.fillAmount;
 	}
 }

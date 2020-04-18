@@ -81,10 +81,10 @@ public class Enemy : MonoBehaviour
 
 	void Die()
 	{
-		animator.SetBool("Dead", true);
+		animator.SetBool("isDead", true);
 
 		GetComponent<Collider2D>().enabled = false;
-		enabled = false;
+		this.enabled = false;
 	}
 	
 	private void Flip()
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
 
 	private void Attack()
 	{
-		// animator.SetTrigger("Attack");
+		animator.SetTrigger("Attack");
 
 		player.GetComponent<Player>().TakeDamage(enemyDamage);
 	}

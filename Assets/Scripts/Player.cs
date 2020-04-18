@@ -97,11 +97,6 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-		if(Input.GetKeyDown(KeyCode.E))
-		{
-            TakeDamage(10);
-		}
-
         if (Time.time >= _nextTimeAttack)
         {
             if (Input.GetMouseButtonDown(0))
@@ -276,6 +271,8 @@ public class Player : MonoBehaviour
     /// </summary>
     void Die()
 	{
+        animator.SetBool("isDead", true);
+
 		GetComponent<Collider2D>().enabled = false;
 		enabled = false;
 
@@ -304,8 +301,6 @@ public class Player : MonoBehaviour
         {
             currentHealth = data.playerHealth;
             _healthBar.SetHealth(currentHealth);
-
-            GameObject.Find("Invisibility").GetComponent<Cooldown>().imageCooldown.fillAmount = data.cooldown;
         }
     }
 }
