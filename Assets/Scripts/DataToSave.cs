@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-
-/// <summary> 
+﻿/// <summary> 
 /// Скрипт для регулирования данных для сохранения 
 /// </summary>
+[System.Serializable]
 public class DataToSave
 {
 	public int playerHealth;

@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
 
 /// <summary> 
 /// Скрипт для регулирования UI-эелемента со здоровьем 
 /// </summary>
 public class HealthBar : MonoBehaviour
 {
+    /// <summary>
+    /// Ссылка на UI-слайдер.
+    /// </summary>
     public Slider slider;
 
     /// <summary> 

@@ -1,7 +1,5 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
 
 /// <summary> 
 /// Скрипт для управления UI-элемента перезарядки "невидимости" 
@@ -12,13 +10,13 @@ public class Cooldown : MonoBehaviour
     private float _invisibilityTime;
     public Image imageCooldown;
 
-
     private void Start()
     {
         imageCooldown = this.GetComponent<Image>();
         _invisibilityTime = GameObject.Find("Player").GetComponent<Player>().invisibilityTime * 3;
     }
     // Update is called once per frame
+    
     void Update()
     {
         //_invisibilityTime = GameObject.Find("Player").GetComponent<Player>().nextInvisibilityTime;

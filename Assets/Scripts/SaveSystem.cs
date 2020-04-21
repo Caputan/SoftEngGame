@@ -2,15 +2,13 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-
 /// <summary> 
 /// Скрипт для сохранения/загрузки данных
 /// </summary>
 public static class SaveSystem 
 {
-
 	/// <summary> 
-	/// Сохранение прогресса игрока 
+	/// Сохранение прогресса игрока
 	/// </summary>
 	/// <param name="player">
 	/// Игровой персонаж, прогресс которого необходимо сохранить
@@ -26,8 +24,7 @@ public static class SaveSystem
 		formatter.Serialize(stream, data);
 		stream.Close();
 	}
-
-
+	
 	/// <summary> 
 	/// Загрузка прогресса игрока
 	/// </summary>

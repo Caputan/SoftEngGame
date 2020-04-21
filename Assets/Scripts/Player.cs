@@ -1,54 +1,105 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
 
 /// <summary> 
 /// Скрипт для управления игровым персонажем 
 /// </summary>
 public class Player : MonoBehaviour
 {
-    private Transform _cameraCoords;
+    /// <summary>
+    /// Ссылка на координаты камеры
+    /// </summary>
     public Vector3 cameraOffset;
+    private Transform _cameraCoords;
 
+    /// <summary>
+    /// Скорость игрока.
+    /// </summary>
     public float movementSpeed;
     private Vector3 _movement;
 
+    /// <summary>
+    /// Ссылка на анимации.
+    /// </summary>
     public Animator animator;
 
     private bool _facesRight;
 
     private Rigidbody2D _player;
 
+    /// <summary>
+    /// Сила прыжка
+    /// </summary>
     public float jumpForce;
-    public bool isGrounded;
 
+    /// <summary>
+    /// Нахождение игрока на поверхности. Значение меняется скриптом GroundCheck
+    /// </summary>
+    public bool isGrounded;
+    
     public Transform attackPosition;
+    /// <summary>
+    /// Радиус атаки.
+    /// </summary>
     public float attackRange;
+    /// <summary>
+    /// Задержка при атаке.
+    /// </summary>
     public float attackRate;
+    /// <summary>
+    /// Ссылка на противников в радиусе атаки
+    /// </summary>
     public LayerMask enemyLayers;
+    /// <summary>
+    /// Урон, наносимый игроком
+    /// </summary>
     public int playerDamage;
     private float _nextTimeAttack;
 
+    /// <summary>
+    /// Задержка перед следующим использованием невидимости
+    /// </summary>
     public float nextInvisibilityTime;
+    /// <summary>
+    /// Максимальное время нахождения в режиме невидимости 
+    /// </summary>
     public float invisibilityTime;
+    /// <summary>
+    /// Время, оставшееся до окончания невидимости
+    /// </summary>
     public float invisibilityTimeLeft;
+    /// <summary>
+    /// ПНахождение игрока в режиме невидимости.
+    /// </summary>
     public bool isInvisible;
 
-	private bool _isInvincible;
+	/// <summary>
+	/// Задержка перед следующим использованием неуязвимости 
+	/// </summary>
 	public float _nextInvinсibilityTime;
+    /// <summary>
+    /// Максимальное время нахождения в режиме неуязвимости
+    /// </summary>
 	public float invinсibilityTime;
+    /// <summary>
+    /// Время, оставшееся до окончания неуязвимости
+    /// </summary>
 	public float invincibilityTimeLeft;
+    private bool _isInvincible;
 
+    /// <summary>
+    /// Значение возможности забраться на лестницу
+    /// </summary>
     public bool canClimb;
 
+    /// <summary>
+    /// Текущее здоровье игрока
+    /// </summary>
 	public int currentHealth;
     private int maxHeatlh;
     private HealthBar _healthBar;
 
-
-
-	void Start()
+    void Start()
     {
         movementSpeed = 5f;
         _facesRight = false;
@@ -139,7 +190,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary> 
-    /// Описание способа атаки игрового персонажа 
+    /// Метод атаки противников игроком
     /// </summary>
     void Attack()
     {
@@ -168,7 +219,7 @@ public class Player : MonoBehaviour
 
 
     /// <summary> 
-    /// Обработка нажатий кнопок с клавиатуры управления движением персонажа  
+    /// Обработка нажатий кнопок с клавиатуры для управления движением персонажа
     /// </summary>
     void Move()
     {
@@ -208,6 +259,9 @@ public class Player : MonoBehaviour
         _player.velocity = new Vector2(0f, vertical * movementSpeed);
     }
 
+    /// <summary>
+    /// Метод поворота модельки при смене направления движения.
+    /// </summary>
     private void Flip()
     {
         // Switch the way the player is labelled as facing.
@@ -215,8 +269,7 @@ public class Player : MonoBehaviour
 
         transform.Rotate(0f, 180f, 0f);
     }
-
-
+    
     /// <summary> 
     /// Описание способа прыжока игрового персонажа 
     /// </summary>
@@ -229,8 +282,7 @@ public class Player : MonoBehaviour
   
         }
     }
-
-
+    
     /// <summary> 
     /// Переключение режима "невидимости" персонажа 
     /// </summary>
@@ -238,7 +290,6 @@ public class Player : MonoBehaviour
     {
         GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
     }
-
 
     /// <summary> 
     /// Получение урона игровым персонажем
@@ -281,7 +332,6 @@ public class Player : MonoBehaviour
         SaveSystem.DeleteData();
     }
 
-
     /// <summary> 
     /// Сохранение прогресса персонажа
     /// </summary>
@@ -289,7 +339,6 @@ public class Player : MonoBehaviour
 	{
 		SaveSystem.SavePlayer(this);
 	}
-
 
     /// <summary> 
     /// Загрузка прогресса персонажа 

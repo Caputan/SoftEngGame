@@ -1,32 +1,71 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Скрипт для управления действиями противника.
+/// </summary>
 public class Enemy : MonoBehaviour
 {
+	/// <summary>
+	/// Ссылка на объект игрока, для взаимодействия с ним
+	/// </summary>
 	public Transform player;
+	
 	private Rigidbody2D _enemy;
+	
+	/// <summary>
+	/// Граница патруля слева от изначального места противника
+	/// </summary>
 	public float patrolLeftBorderX;
+	/// <summary>
+	/// Граница патруля справа от изначального места противнка
+	/// </summary>
 	public float patrolRightBorderX;
 	
+	/// <summary>
+	/// Ссылка на анимации.
+	/// </summary>
 	public Animator animator;
 
+	/// <summary>
+	/// Максимальное здоровье противника
+	/// </summary>
 	public int maxHealth;
 	private int currentHealth;
 
+	/// <summary>
+	/// Время задержки при достижении границы патруля  
+	/// </summary>
 	public float waitTime;
+	/// <summary>
+	/// Скорость передвижения противника
+	/// </summary>
 	public float movementSpeed;
+	
 	private bool _isWalking;
 	private bool _facesRight;
 	private float _currentWaitTime;
 	
+	/// <summary>
+	/// Радиус обнаружения игрока противником
+	/// </summary>
 	public float detectDistance;
+	/// <summary>
+	/// Допускаемое растояние для покидания границ патруля в случае обнаружения игрока
+	/// </summary>
 	public float allowedWalkAwayDistance;
+	
 	private bool _isHunting;
 
+	/// <summary>
+	/// Урон, который наносит противник
+	/// </summary>
 	public int enemyDamage;
+	/// <summary>
+	/// Время задержки между атаками.
+	/// </summary>
 	public float attackDelay;
+	
 	private bool _playerInAttackRange;
 	private float _currentAttackDelay;
 
@@ -69,6 +108,12 @@ public class Enemy : MonoBehaviour
 		animator.SetFloat("Speed", _enemy.velocity.magnitude);
 	}
 
+    /// <summary>
+    /// Метод получение урона.
+    /// </summary>
+    /// <param name="damage">
+    /// Количество получаемого урона.
+    /// </param>
     public void TakeDamage(int damage)
 	{
 		currentHealth -= damage;
@@ -79,6 +124,9 @@ public class Enemy : MonoBehaviour
 			Die();
 	}
 
+    /// <summary>
+    /// Метод смерти. Вызывается, если закончились очки здоровья.
+    /// </summary>
 	void Die()
 	{
 		animator.SetBool("isDead", true);
@@ -87,6 +135,9 @@ public class Enemy : MonoBehaviour
 		this.enabled = false;
 	}
 	
+    /// <summary>
+    /// Метод поворота модельки при смене направления движения.
+    /// </summary>
 	private void Flip()
 	{
 		// Switch the way the player is labelled as facing.
@@ -95,6 +146,9 @@ public class Enemy : MonoBehaviour
 		transform.Rotate(0f, 180f, 0f);
 	}
 
+    /// <summary>
+    /// Метод атаки, срабатывающий при нахождении рядом с игроком.
+    /// </summary>
 	private void Attack()
 	{
 		animator.SetTrigger("Attack");
@@ -102,6 +156,9 @@ public class Enemy : MonoBehaviour
 		player.GetComponent<Player>().TakeDamage(enemyDamage);
 	}
 	
+    /// <summary>
+    /// Бесконечно повторяющийся метод патрулирования области на предмет наличия в ней игрока.
+    /// </summary>
 	private void Patrol()
 	{
 		if (_isHunting)
@@ -164,6 +221,9 @@ public class Enemy : MonoBehaviour
 		}
 	}
 	
+	/// <summary>
+	/// Метод погони за игроком при обнаружении.
+	/// </summary>
 	private void HuntPlayer()
 	{
 		var enemyPos = _enemy.position.x;
