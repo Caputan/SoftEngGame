@@ -99,6 +99,9 @@ public class Player : MonoBehaviour
     private int maxHeatlh;
     private HealthBar _healthBar;
 
+    public int activeSaveIndex;
+    public string nickname;
+
     void Start()
     {
         movementSpeed = 5f;
@@ -127,6 +130,10 @@ public class Player : MonoBehaviour
 		_nextInvinсibilityTime = 0f;
         invinсibilityTime = 1f;
         invisibilityTime = 5f;
+
+        activeSaveIndex = Slot.activeIndex;
+
+        nickname = Slot.nickname;
 
         LoadProgress();
     }
@@ -329,7 +336,7 @@ public class Player : MonoBehaviour
 
         SceneManager.LoadScene(0);
 
-        SaveSystem.DeleteData();
+        SaveSystem.ClearData();
     }
 
     /// <summary> 

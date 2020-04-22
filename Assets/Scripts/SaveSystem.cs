@@ -16,7 +16,7 @@ public static class SaveSystem
 	public static void SavePlayer(Player player)
 	{
 		BinaryFormatter formatter = new BinaryFormatter();
-		string path = Application.persistentDataPath + "/player.op";
+		string path = Application.persistentDataPath + "/player" + player.activeSaveIndex.ToString() + ".save";
 		FileStream stream = new FileStream(path, FileMode.Create);
 
 		DataToSave data = new DataToSave(player);
@@ -30,7 +30,7 @@ public static class SaveSystem
 	/// </summary>
 	public static DataToSave LoadPlayer()
 	{
-		string path = Application.persistentDataPath + "/player.op";
+		string path = Application.persistentDataPath + "/player" + Slot.activeIndex.ToString() + ".save"; ;
 		if (File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
@@ -53,9 +53,19 @@ public static class SaveSystem
 		}
 	}
 
+	public static void ClearData()
+	{
+		string path = Application.persistentDataPath + "/player" + Slot.activeIndex.ToString() + ".save";
+		if (File.Exists(path))
+		{
+			FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+			stream.SetLength(0);
+		}
+	}
+
 	public static void DeleteData()
 	{
-		string path = Application.persistentDataPath + "/player.op";
+		string path = Application.persistentDataPath + "/player" + Slot.activeIndex.ToString() + ".save";
 		if (File.Exists(path))
 		{
 			File.Delete(path);

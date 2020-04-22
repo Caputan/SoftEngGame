@@ -36,23 +36,29 @@ public class Menu : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
-        resolutionsDropdown.ClearOptions();
-        resolutionsDropdown.AddOptions(options);
-        resolutionsDropdown.value = currentResolutionIndex;
-        resolutionsDropdown.RefreshShownValue();
+        try
+        {
+            resolutionsDropdown.ClearOptions();
+            resolutionsDropdown.AddOptions(options);
+            resolutionsDropdown.value = currentResolutionIndex;
+            resolutionsDropdown.RefreshShownValue();
+        } catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            PlayerPrefs.DeleteAll();
+            SaveSystem.DeleteData();
         }
     }
 
     public void ButtonCharacterPressed()
     {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(6);
     }
 
     /// <summary>

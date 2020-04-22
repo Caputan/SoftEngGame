@@ -11,15 +11,27 @@ public class LevelSelection : MonoBehaviour
     /// Ссылка на UI-элементы
     /// </summary>
     public Button[] lvlButtons;
+
+    private int _levelAt;
     
     // Start is called before the first frame update
     void Start()
     {
-        int levelAt = PlayerPrefs.GetInt("levelAt", 2);
+        DataToSave data = SaveSystem.LoadPlayer();
+        try
+        {
+            _levelAt = data.currentLevelIndex;
+        }
+        catch
+        {
+            _levelAt = 2;
+        }
 
         for(int i = 0; i < lvlButtons.Length; i++)
         {
-            if (i + 2 > levelAt)
+            lvlButtons[0].interactable = true;
+
+            if (i + 2 > _levelAt)
                 lvlButtons[i].interactable = false;
         }
     }
