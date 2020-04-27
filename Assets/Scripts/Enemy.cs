@@ -99,7 +99,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-	    Debug.Log(patrolLeftBorderX);
 	    Patrol();
 		if (!player.gameObject.GetComponent<Player>().isInvisible)
 		{
