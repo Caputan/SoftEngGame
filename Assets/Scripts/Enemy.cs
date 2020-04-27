@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 	/// Максимальное здоровье противника
 	/// </summary>
 	public int maxHealth;
-	private int currentHealth;
+	public int currentHealth;
 
 	/// <summary>
 	/// Время задержки при достижении границы патруля  
@@ -115,13 +115,19 @@ public class Enemy : MonoBehaviour
     /// </param>
     public void TakeDamage(int damage)
 	{
-		currentHealth -= damage;
-
 		animator.SetTrigger("Hurt");
 
-		if(currentHealth <= 0)
-			Die();
+		TakeDamage_(damage);
 	}
+
+    public void TakeDamage_(int damage)
+    {
+	    currentHealth -= damage;
+	    if (currentHealth <= 0)
+	    {
+		    Die();
+	    }
+    }
 
     /// <summary>
     /// Метод смерти. Вызывается, если закончились очки здоровья.

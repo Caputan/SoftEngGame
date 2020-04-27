@@ -1,53 +1,68 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 namespace Tests
+{
+    public class TestSuite
     {
-        public class TestSuite
+        [UnityTest]
+        public IEnumerator Enemy_TakeDamage_CurrentHealthBecameLess()
         {
-            // // A Test behaves as an ordinary method
-            // [Test]
-            // public void TestSuiteSimplePasses()
-            // {
-            //     // Use the Assert class to test conditions
-            // }
-            //
-            // // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-            // // `yield return null;` to skip a frame.
-            // [UnityTest]
-            // public IEnumerator TestSuiteWithEnumeratorPasses()
-            // {
-            //     // Use the Assert class to test conditions.
-            //     // Use yield to skip a frame.
-            //     yield return null;
-            // }
+            var enemy = new Enemy(); // Вызывает Warning из-за того, что половина методов перестает работать как надо
+            enemy.currentHealth = 100;
             
-            // private Game game;
+            enemy.TakeDamage_(20);
+            
+            Assert.True(enemy.currentHealth == 80);
+            
+            yield return null;
+            GameObject.Destroy(enemy);
+        }
+        
+        [UnityTest]
+        public IEnumerator SaveSystem_SavePlayer_DataSavedSuccessfully()
+        {
+            var player = new Player(); // Вызывает Warning из-за того, что половина методов перестает работать как надо
+            player.activeSaveIndex = 3;
+            player.nickname = "MASTERPIECE";
+            player.currentHealth = 42;
 
-            private GameObject _gameObject;
-            private Player _player;
-            
-            [UnityTest]
-            public IEnumerator PlayerTakesDamage()
+            bool success;
+            try
             {
-                _gameObject = GameObject.Instantiate(new GameObject());
-                var player = _gameObject.AddComponent<Player>();
-                Debug.Log(player);
-                
-                // GameObject farmObject = MonoBehaviour.Instantiate(prefab);
-                // var player = farmObject.GetComponent<Player>();
-
-                player.currentHealth = 100;
-                var hpStart = player.currentHealth;
-                player.TakeDamage(20);
-                var hpEnd = player.currentHealth;
-                Assert.True(hpStart - hpEnd == 20);
-                yield return null;
+                SaveSystem.SavePlayer(player);
+                success = true;
             }
+            catch
+            {
+                success = false;
+            }
+            
+            Assert.True(success);
+            
+            yield return null;
+        }
+        
+        [UnityTest]
+        public IEnumerator SaveSystem_LoadPlayer_CorrectNicknameLoaded()
+        {
+            Slot.activeIndex = 3;
+            var loadedData = SaveSystem.LoadPlayer();
+
+            Assert.True(loadedData.nickname == "MASTERPIECE");
+            yield return null;
+        }
+        
+        [UnityTest]
+        public IEnumerator SaveSystem_LoadPlayer_CorrectHealthDataLoaded()
+        {
+            Slot.activeIndex = 3;
+            var loadedData = SaveSystem.LoadPlayer();
+
+            Assert.True(loadedData.playerHealth == 42);
+            yield return null;
         }
     }
-
+}
