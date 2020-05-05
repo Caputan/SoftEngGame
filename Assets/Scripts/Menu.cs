@@ -22,6 +22,11 @@ public class Menu : MonoBehaviour
 
     private Resolution[] _resolutions;
 
+    public static bool GameIsPaused;
+
+    public GameObject pauseMenuUI;
+
+
     private void Start()
     {
         Screen.fullScreen = true;
@@ -46,6 +51,11 @@ public class Menu : MonoBehaviour
         {
             Debug.Log(e);
         }
+
+        pauseMenuUI = GameObject.Find("PauseMenu");
+
+        GameIsPaused = false;
+        pauseMenuUI.SetActive(GameIsPaused);
     }
 
     private void Update()
@@ -54,12 +64,38 @@ public class Menu : MonoBehaviour
         {
             SaveSystem.DeleteData();
         }
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			if (GameIsPaused)
+			{
+                Resume();
+			} else
+			{
+                Pause();
+			}
+		}
     }
 
     public void ButtonCharacterPressed()
     {
         SceneManager.LoadScene(6);
     }
+
+    public void Resume()
+	{
+        pauseMenuUI.SetActive(false);
+
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+
+    void Pause()
+	{
+        pauseMenuUI.SetActive(true);
+
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+	}
 
     /// <summary>
     /// Обработка нажатия кнопки "Настройки". Переадресует пользователя на экран настроек.
@@ -74,6 +110,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ButtonToMenuPressed()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
     
