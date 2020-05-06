@@ -331,10 +331,18 @@ public class Player : MonoBehaviour
 	{
         animator.SetBool("isDead", true);
 
-		GetComponent<Collider2D>().enabled = false;
+        Dialogue deadDialogue = new Dialogue();
+        deadDialogue.name = "Oh no!";
+        deadDialogue.sentences = new string[1];
+        deadDialogue.sentences[0] = "You are dead!";
+
+        FindObjectOfType<DialogueManager>().StartDialogue(deadDialogue);
+
+
+        GetComponent<Collider2D>().enabled = false;
 		enabled = false;
 
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
 
         SaveSystem.ClearData();
     }
