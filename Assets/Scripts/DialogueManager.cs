@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	private void EndDialogue()
+	public void EndDialogue()
 	{
 		animator.SetBool("IsOpen", false);
 		if(FindObjectOfType<Player>().currentHealth <= 0 || dialogueText.text == "You have WON!")

@@ -123,7 +123,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage_(int damage)
     {
 	    currentHealth -= damage;
-	    if (currentHealth <= 0)
+
+		FindObjectOfType<AudioManager>().Play("Punch");
+
+		if (currentHealth <= 0)
 	    {
 		    Die();
 	    }
@@ -173,6 +176,8 @@ public class Enemy : MonoBehaviour
 		
 		if (_isWalking)
 		{
+			if (_enemy.velocity.magnitude != 0)
+				FindObjectOfType<AudioManager>().PlayOneShot("Footsteps");
 			if (_facesRight)
 			{
 				if (transform.position.x < patrolRightBorderX) // Goes right

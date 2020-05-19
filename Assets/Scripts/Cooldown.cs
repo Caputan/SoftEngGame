@@ -10,6 +10,8 @@ public class Cooldown : MonoBehaviour
     private float _invisibilityTime;
     public Image imageCooldown;
 
+    
+
     private void Start()
     {
         imageCooldown = this.GetComponent<Image>();

@@ -21,9 +21,9 @@ public class Menu : MonoBehaviour
     public TMP_Dropdown resolutionsDropdown;
 
     private Resolution[] _resolutions;
+    
 
     public static bool GameIsPaused;
-
     public GameObject pauseMenuUI;
 
 
@@ -78,11 +78,13 @@ public class Menu : MonoBehaviour
 
     public void ButtonCharacterPressed()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot("Click");
         SceneManager.LoadScene(6);
     }
 
     public void Resume()
 	{
+        FindObjectOfType<AudioManager>().PlayOneShot("Click");
         pauseMenuUI.SetActive(false);
 
         Time.timeScale = 1f;
@@ -102,6 +104,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ButtonSettingsPressed()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot("Click");
         SceneManager.LoadScene(5);
     }
     
@@ -110,6 +113,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ButtonToMenuPressed()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot("Click");
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
@@ -119,6 +123,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     public void ButtonExitPressed()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot("Click");
         Application.Quit();
     }
 
@@ -159,6 +164,7 @@ public class Menu : MonoBehaviour
 
     public void ButtonPlayPressed()
     {
+        FindObjectOfType<AudioManager>().PlayOneShot("Click");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

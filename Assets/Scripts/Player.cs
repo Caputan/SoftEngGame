@@ -230,7 +230,10 @@ public class Player : MonoBehaviour
     /// </summary>
     void Move()
     {
+        Debug.Log(_movement.magnitude);
         this.transform.position += _movement * Time.deltaTime * movementSpeed;
+        if(_movement.magnitude != 0 && isGrounded)
+            FindObjectOfType<AudioManager>().PlayOneShot("Footsteps");
         if (_movement.x > 0 && !_facesRight)
         {
             // ... flip the player.
@@ -308,7 +311,9 @@ public class Player : MonoBehaviour
 	{
 		if (!_isInvincible)
 		{
-			currentHealth -= damage;
+            FindObjectOfType<AudioManager>().Play("Enemy_Punch");
+
+            currentHealth -= damage;
 
             _healthBar.SetHealth(currentHealth);
 

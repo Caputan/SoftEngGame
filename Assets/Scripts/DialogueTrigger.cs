@@ -9,12 +9,12 @@ public class DialogueTrigger : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Player")
-			TriggerDialogue();
+			FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
 	}
 
-
-	public void TriggerDialogue()
+	private void OnTriggerExit2D(Collider2D collision)
 	{
-		FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+		if (collision.gameObject.tag == "Player")
+			FindObjectOfType<DialogueManager>().EndDialogue();
 	}
 }
